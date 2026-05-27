@@ -6,7 +6,7 @@ function NavBar() {
     return (
         <>
             <div class="header-left">
-                <img src={videoLogo} alt="videobelajar logo" class="videobelajar-logo"/>
+                <img src={videoLogo} alt="videobelajar logo" class="nav-videobelajar-logo"/>
                 <img src={menuLogo} alt="menu-pop" class="menu-pop" />
                 <a href="#">Kategori</a>
             </div>

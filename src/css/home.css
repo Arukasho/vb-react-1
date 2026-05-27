@@ -71,6 +71,10 @@ img.videobelajar-logo {
     height: auto;
 }
 
+.nav-videobelajar-logo {
+    margin-left: 0px;
+}
+
 .header-right img {
     width: 44px;
     height: 44px;
@@ -220,8 +224,10 @@ button {
 }
 
 .lessons-container {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: 20px;
     
 }
@@ -413,6 +419,7 @@ button {
 
 .subscribe-button {
     position: absolute;
+    bottom: 22px;
     right: 1.5%;
     color: white;
     background-color: orange;
@@ -521,6 +528,10 @@ footer {
         width: 80%;
         padding: 7px 2px;
         font-size: 12px;
+    }
+
+    .subscribe-button {
+        bottom: 28px;
     }
 
     .hero-banner {
@@ -664,8 +675,8 @@ footer {
 }
 
 @media (max-width: 650px) {
-    img.videobelajar-logo {
-        width: 50%;
+    .nav-videobelajar-logo {
+        width: 40%;
     }
 
     .hero-words {
