@@ -213,6 +213,7 @@ button {
 
 .lessons-collection {
     width: 100%;
+    text-align: left;
     height: fit-content;
     padding: 20px clamp(5px, 10vw, 160px);
     box-sizing: border-box;
@@ -228,6 +229,7 @@ button {
 .lesson {
     display: flex;
     flex-direction: column;
+    text-align: left;
     gap: 16px;
     flex-grow: 1;
     height: fit-content;
@@ -427,6 +429,7 @@ footer {
     width: 100%;
     font-style: DM Sans;
     color: #333333AD;
+    text-align: left;
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
@@ -735,7 +738,7 @@ footer {
         display: none;
     }
 
-    .di-gojek {
+    .di-company {
         display: none;
     }
 
