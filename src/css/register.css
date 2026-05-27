@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Lato;
+}
+
+#root {
+    width: 100%;
+    max-width: 100%;
+    background-color: rgb(255, 253, 243);
+    margin: 0 auto;
+    text-align: center;
+    border-inline: 1px solid var(--border);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    text-align: left;
+    width: 100%;
+    height: fit-content;
+    max-height: 80px;
+}
+
+header img {
+    width: 194px;
+    height: 30px;
+    padding: 8px 23px;
+    margin-left: 80px;
+    box-sizing: content-box;
+}
+
+.form-container {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.yuk {
+    font-size: 11px;
+    color: rgb(83, 80, 80);
+    margin-bottom: 30px;
+}
+
+.flex-container-1 {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    width: 30%;
+    min-width: 240px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(252, 252, 252);
+    padding: 25px;
+    margin: 20px 25px;
+
+}
+
+label {
+    font-size: 13px;
+    align-self: start;
+    padding: 0;
+    color: rgb(83, 80, 80);
+}
+
+input {
+    padding: 12px;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.phonenumber {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.phone-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 12px;
+}
+
+.country {
+    width: 40%;
+}
+
+.phone {
+    width: 100%;
+}
+
+.required-asterisk {
+    color: red;
+}
+
+.username-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2px;
+}
+
+.email-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2px;
+}
+
+.masuk-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.phone {
+    width: 100%;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+.daftar-masuk-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 7px 22px;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 10px;
+    font-size: 14px;
+    width: 100%;
+    height: 42px;
+    cursor: pointer;
+}
+
+button.register-button {
+    color: white;
+    background-color: green;
+}
+
+button.login-button {
+    color: green;
+    background-color: rgba(226, 252, 217, 0.8);
+}
+
+.divider {
+    margin: 20px 0;
+}
+
+.divider span {
+    font-size: 13px;
+    color: rgb(83, 80, 80);
+}
+
+.google-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 16px;
+}
+
+.google-logo {
+    width: 15px;
+    height: 20px;
+}
+
+span.daftar-google {
+    font-style: bold;
+}
+
+.password-input {
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+
+a.forget-password {
+    display: block;
+    font-size: 13px;
+    text-align: right;
+    font-weight: bold;
+    color: rgb(83, 80, 80);
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.toggle-icon {
+    position: absolute;
+    right: 12px;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .flex-container-1 {
+    margin: 100px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  header img {
+    width: 40vw;
+    margin-left: 20px;
+  }
+}
