@@ -3,21 +3,21 @@ import lessons from '../lessondata.js'
 
 function LessonSection() {
     return (
-        <section class="lessons-collection">
-            <div class="collection-title-group">
-                <h1 class="collection-title">Koleksi Video Pembelajaran Unggulan</h1>
-                <p class="explore-yuk">Jelajahi Dunia Pengetahuan Melalui Pilihan Kami!</p>
+        <section className="lessons-collection">
+            <div className="collection-title-group">
+                <h1 className="collection-title">Koleksi Video Pembelajaran Unggulan</h1>
+                <p className="explore-yuk">Jelajahi Dunia Pengetahuan Melalui Pilihan Kami!</p>
             </div>
-            <div class="menu-bar">
-                <div class="item" id="all-class">Semua Kelas</div>
-                <div class="item">Pemasaran</div>
-                <div class="item">Desain</div>
-                <div class="item">Pengembangan Diri</div>
-                <div class="item">Bisnis</div>
+            <div className="menu-bar">
+                <div className="item" id="all-class">Semua Kelas</div>
+                <div className="item">Pemasaran</div>
+                <div className="item">Desain</div>
+                <div className="item">Pengembangan Diri</div>
+                <div className="item">Bisnis</div>
             </div>
-            <div class="menu-bar-slider"></div>
-            
-            <div class="lessons-container">
+            <div className="menu-bar-slider"></div>
+
+            <div className="lessons-container">
                 {lessons.map(lesson => (
                     <LessonCard key={lesson.id} lesson={lesson} />
                 ))}

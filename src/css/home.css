@@ -517,6 +517,12 @@ footer {
     justify-content: space-between;
 }
 
+.social-media {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
 @media (max-width: 1200px) {
     .banner-button {
         width: 50%;

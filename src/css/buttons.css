@@ -1,0 +1,23 @@
+button {
+    padding: 7px 22px;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 10px;
+    font-size: 14px;
+    width: 100%;
+    height: 42px;
+    cursor: pointer;
+}
+
+button.dark-button {
+    color: white;
+    background-color: green;
+    height: 42px;
+    width: 100%;
+}
+
+button.light-button {
+    color: green;
+    background-color: rgba(226, 252, 217, 0.8);
+    height: 42px;
+    width: 100%;
+}
