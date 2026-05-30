@@ -1,6 +1,6 @@
 import LogoBar from '../components/LogoBar.jsx'
 import LoginCard from '../components/LoginCard.jsx'
-import '../css/register.css'
+import '../css/login.css'
 
 function LoginPage() {
 
