@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import NavBar from '../components/NavBar.jsx'
 import HeroSection from '../components/HeroSection.jsx';
 import LessonSection from '../components/LessonSection.jsx';
@@ -15,6 +16,11 @@ function HomePage() {
 
       <main>
         <HeroSection />
+        <Link to="/crud">
+          <button type="button" className="admin-button">
+            Go to Admin Page
+          </button>
+        </Link>
         <LessonSection />
         <NewsletterSection />
       </main>

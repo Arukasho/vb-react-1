@@ -1,9 +1,13 @@
-import eyeLogo from '../assets/images/eye-off.png'
+import eyeOff from '../assets/images/hide.png'
+import eyeOn from '../assets/images/view.png'
 import DarkGreenButton from './DarkGreenButton';
 import GoogleButton from './GoogleButton';
 import LightGreenButton from './LightGreenButton';
+import {useState} from 'react';
 
 function LoginCard() {
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
     return (
         <main className="form-container">
             <form action="#" className="flex-container-1">
@@ -21,8 +25,13 @@ function LoginCard() {
                 <div className="input password-input">
                     <label for="password">Kata Sandi <span className="required-asterisk">*</span></label>
                     <div className="masuk-wrapper">
-                        <input type="password" className="password" name="password" required />
-                        <img src={eyeLogo} alt="toggle-view" className="toggle-icon" />
+                        <input type={isPasswordVisible ? "text" : "password"} className="password" name="password" required />
+                        <img 
+                            src={isPasswordVisible ? eyeOn : eyeOff} 
+                            alt="toggle-view" 
+                            className="toggle-icon" 
+                            onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                        />
                     </div>
                     <a href="forget-password.html" className="forget-password">Lupa Password?</a>
                 </div>
