@@ -265,7 +265,7 @@ button {
     scale: 1.03;
 }
 
-.lesson img {
+.lesson-thumbnail {
     height: 194px;
     width: 100%;
     border-radius: 10px;
@@ -296,7 +296,7 @@ button {
     gap: 10px;
 }
 
-.lecture-author img {
+.author-avatar {
     height: 40px;
     width: 40px;
 }

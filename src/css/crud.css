@@ -80,6 +80,7 @@ body {
   border: 1px solid #e8e4db;
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
+  text-align: left;
 }
 
 .lesson-card:hover {

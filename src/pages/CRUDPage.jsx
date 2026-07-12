@@ -1,88 +1,133 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 import "../css/crud.css";
+
 import LessonCardCRUD from "../components/LessonCardCRUD";
 import LessonFormCRUD from "../components/LessonFormCRUD";
-import lessons from '../lessondata.js'
 
-const SEED = lessons.map((lesson, index) => ({
-  ...lesson,
-  price: Number(lesson.price),
-}));
+import {
+  getLessons,
+  createLesson,
+  updateLesson,
+  deleteLesson,
+} from "../api/lessonsAPI";
 
-let nextId = SEED.length + 1;
-
-export default function App() {
-  const [lessons, setLessons] = useState(() => {
-    try {
-      const saved = localStorage.getItem("vb_lessons");
-      return saved ? JSON.parse(saved) : SEED;
-    } catch {
-      return SEED;
-    }
-  });
+export default function CRUDPage() {
+  const [lessons, setLessons] = useState([]);
   const [editLesson, setEditLesson] = useState(null);
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem("vb_lessons", JSON.stringify(lessons));
-  }, [lessons]);
+    loadLessons();
+  }, []);
 
-  function notify(msg) {
-    setToast(msg);
-    setTimeout(() => setToast(null), 2500);
+  async function loadLessons() {
+    try {
+      const data = await getLessons();
+      setLessons(data);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  function handleAdd(form) {
-    setLessons((prev) => [{ id: nextId++, ...form, price: Number(form.price) }, ...prev]);
-    notify("Pelajaran ditambahkan");
+  function notify(message) {
+    setToast(message);
+
+    setTimeout(() => {
+      setToast(null);
+    }, 2500);
   }
 
-  function handleUpdate(form) {
-    setLessons((prev) =>
-      prev.map((l) => (l.id === editLesson.id ? { ...l, ...form, price: Number(form.price) } : l))
-    );
-    setEditLesson(null);
-    notify("Pelajaran diperbarui");
+  async function handleAdd(form) {
+    try {
+      const lesson = await createLesson(form);
+
+      setLessons((prev) => [lesson, ...prev]);
+
+      notify("Pelajaran ditambahkan");
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  function handleDelete(id) {
-    setLessons((prev) => prev.filter((l) => l.id !== id));
-    notify("Pelajaran dihapus");
+  async function handleUpdate(form) {
+    try {
+      const lesson = await updateLesson(editLesson.id, form);
+
+      setLessons((prev) =>
+        prev.map((item) =>
+          item.id === lesson.id ? lesson : item
+        )
+      );
+
+      setEditLesson(null);
+
+      notify("Pelajaran diperbarui");
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function handleDelete(id) {
+    try {
+      await deleteLesson(id);
+
+      setLessons((prev) =>
+        prev.filter((lesson) => lesson.id !== id)
+      );
+
+      notify("Pelajaran dihapus");
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
     <>
       <main className="page">
         <h1 className="page__heading">Admin Page</h1>
-        <p className="page__subheading">Kelola Kelas</p>
+
+        <p className="page__subheading">
+          Kelola Kelas
+        </p>
+
         <Link to="/">
-          <button type="button" className="admin-button">
+          <button
+            className="admin-button"
+            type="button"
+          >
             Go to Home
           </button>
         </Link>
 
         <LessonFormCRUD
           onAdd={handleAdd}
-          editLesson={editLesson}
           onUpdate={handleUpdate}
           onCancel={() => setEditLesson(null)}
+          editLesson={editLesson}
         />
 
         <div className="card-grid">
-          {lessons.map((lesson, i) => (
+          {lessons.map((lesson, index) => (
             <LessonCardCRUD
               key={lesson.id}
               lesson={lesson}
-              index={i}
+              index={index}
               onEdit={() => setEditLesson(lesson)}
-              onDelete={() => handleDelete(lesson.id)}
+              onDelete={() =>
+                handleDelete(lesson.id)
+              }
             />
           ))}
         </div>
       </main>
 
-      {toast && <div className="toast">{toast}</div>}
+      {toast && (
+        <div className="toast">
+          {toast}
+        </div>
+      )}
     </>
   );
 }

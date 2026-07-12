@@ -1,7 +1,29 @@
 import LessonCard from './LessonCard.jsx';
-import lessons from '../lessondata.js'
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+const PROJECT_SECRET = import.meta.env.VITE_PROJECT_SECRET;
 
 function LessonSection() {
+    const [lessons, setLessons] = useState([]);
+    
+      useEffect(() => {
+        async function fetchLessons() {
+          try {
+            const response = await axios.get(
+              `https://${PROJECT_SECRET}.mockapi.io/api/vb/lessons`
+            );
+    
+            console.log(response.data);
+            setLessons(response.data);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+    
+        fetchLessons();
+      }, []);
+
     return (
         <section className="lessons-collection">
             <div className="collection-title-group">
