@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "../css/crud.css";
 
@@ -7,44 +8,31 @@ import LessonCardCRUD from "../components/LessonCardCRUD";
 import LessonFormCRUD from "../components/LessonFormCRUD";
 
 import {
-  getLessons,
-  createLesson,
-  updateLesson,
-  deleteLesson,
-} from "../api/lessonsAPI";
+  fetchLessons,
+  addLesson,
+  editLessonThunk,
+  removeLesson,
+} from "../redux/actions/lessonActions"; // sesuaikan path
 
 export default function CRUDPage() {
-  const [lessons, setLessons] = useState([]);
+  const dispatch = useDispatch();
+  const lessons = useSelector((state) => state.lessons);
+
   const [editLesson, setEditLesson] = useState(null);
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
-    loadLessons();
-  }, []);
-
-  async function loadLessons() {
-    try {
-      const data = await getLessons();
-      setLessons(data);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+    dispatch(fetchLessons());
+  }, [dispatch]);
 
   function notify(message) {
     setToast(message);
-
-    setTimeout(() => {
-      setToast(null);
-    }, 2500);
+    setTimeout(() => setToast(null), 2500);
   }
 
   async function handleAdd(form) {
     try {
-      const lesson = await createLesson(form);
-
-      setLessons((prev) => [lesson, ...prev]);
-
+      await dispatch(addLesson(form));
       notify("Pelajaran ditambahkan");
     } catch (err) {
       console.error(err);
@@ -53,16 +41,8 @@ export default function CRUDPage() {
 
   async function handleUpdate(form) {
     try {
-      const lesson = await updateLesson(editLesson.id, form);
-
-      setLessons((prev) =>
-        prev.map((item) =>
-          item.id === lesson.id ? lesson : item
-        )
-      );
-
+      await dispatch(editLessonThunk(editLesson.id, form));
       setEditLesson(null);
-
       notify("Pelajaran diperbarui");
     } catch (err) {
       console.error(err);
@@ -71,12 +51,7 @@ export default function CRUDPage() {
 
   async function handleDelete(id) {
     try {
-      await deleteLesson(id);
-
-      setLessons((prev) =>
-        prev.filter((lesson) => lesson.id !== id)
-      );
-
+      await dispatch(removeLesson(id));
       notify("Pelajaran dihapus");
     } catch (err) {
       console.error(err);
@@ -87,16 +62,10 @@ export default function CRUDPage() {
     <>
       <main className="page">
         <h1 className="page__heading">Admin Page</h1>
-
-        <p className="page__subheading">
-          Kelola Kelas
-        </p>
+        <p className="page__subheading">Kelola Kelas</p>
 
         <Link to="/">
-          <button
-            className="admin-button"
-            type="button"
-          >
+          <button className="admin-button" type="button">
             Go to Home
           </button>
         </Link>
@@ -115,19 +84,13 @@ export default function CRUDPage() {
               lesson={lesson}
               index={index}
               onEdit={() => setEditLesson(lesson)}
-              onDelete={() =>
-                handleDelete(lesson.id)
-              }
+              onDelete={() => handleDelete(lesson.id)}
             />
           ))}
         </div>
       </main>
 
-      {toast && (
-        <div className="toast">
-          {toast}
-        </div>
-      )}
+      {toast && <div className="toast">{toast}</div>}
     </>
   );
 }

@@ -1,28 +1,15 @@
 import LessonCard from './LessonCard.jsx';
-import { useState, useEffect } from "react";
-import axios from "axios";
-
-const PROJECT_SECRET = import.meta.env.VITE_PROJECT_SECRET;
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLessons } from "../redux/actions/lessonActions";
 
 function LessonSection() {
-    const [lessons, setLessons] = useState([]);
-    
-      useEffect(() => {
-        async function fetchLessons() {
-          try {
-            const response = await axios.get(
-              `https://${PROJECT_SECRET}.mockapi.io/api/vb/lessons`
-            );
-    
-            console.log(response.data);
-            setLessons(response.data);
-          } catch (err) {
-            console.error(err);
-          }
-        }
-    
-        fetchLessons();
-      }, []);
+    const dispatch = useDispatch();
+    const lessons = useSelector((state) => state.lessons);
+
+    useEffect(() => {
+        dispatch(fetchLessons());
+    }, [dispatch]);
 
     return (
         <section className="lessons-collection">
